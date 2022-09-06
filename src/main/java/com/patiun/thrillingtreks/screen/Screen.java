@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Map;
 
 @Entity
-@Embeddable
 @Table(name = "screen")
 public class Screen {
 

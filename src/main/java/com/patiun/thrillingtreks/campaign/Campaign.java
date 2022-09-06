@@ -26,7 +26,7 @@ public class Campaign {
     @NotNull
     private User author;
 
-    @Embedded
+    @OneToOne
     @NotNull
     private Screen startScreen;
 
