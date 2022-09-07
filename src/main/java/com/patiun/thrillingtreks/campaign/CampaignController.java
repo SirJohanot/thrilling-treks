@@ -15,7 +15,9 @@ public class CampaignController {
     }
 
     public ModelAndView createCampaign(String name, String description) {
-        campaignService.create(name, description, name);
-        return new ModelAndView("redirect:/campaigns");
+        Campaign newCampaign = campaignService.create(name, description, name);
+        Long campaignId = newCampaign.getId();
+        String redirectPath = String.format("reirect:/campaigns?id=%d", campaignId);
+        return new ModelAndView(redirectPath);
     }
 }

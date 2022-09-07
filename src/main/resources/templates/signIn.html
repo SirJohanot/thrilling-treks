@@ -6,11 +6,11 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-<form method="post" action="/sign-in">
+<form action="#" method="post" th:action="@{/sign-in}">
     <label for="name">Username</label>
-    <input type="text" id="name"/>
+    <input type="text" id="name" name="name"/>
     <label for="password">Password</label>
-    <input type="password" id="password"/>
+    <input type="password" id="password" name="password"/>
     <input type="submit"/>
 </form>
 </body>

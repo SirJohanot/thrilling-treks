@@ -48,9 +48,10 @@ public class SecurityConfig {
 //                )
 //                .logout(LogoutConfigurer::permitAll);
         http.authorizeRequests()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/sign-in-page").permitAll();
+        http.csrf().disable();
         return http.build();
     }
 

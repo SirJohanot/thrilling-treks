@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +15,11 @@ public class User implements UserDetails {
 
     @Id
     @NotNull
-    @Column(name = "user_name")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotNull
+    @Column(name = "user_name", unique = true)
     private String name;
 
     @NotNull
@@ -31,6 +32,14 @@ public class User implements UserDetails {
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -90,6 +99,9 @@ public class User implements UserDetails {
 
         User user = (User) o;
 
+        if (id != null ? !id.equals(user.id) : user.id != null) {
+            return false;
+        }
         if (name != null ? !name.equals(user.name) : user.name != null) {
             return false;
         }
@@ -98,7 +110,8 @@ public class User implements UserDetails {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
@@ -106,7 +119,8 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

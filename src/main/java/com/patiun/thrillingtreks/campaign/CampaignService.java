@@ -19,8 +19,7 @@ public class CampaignService {
 
     public Campaign create(String name, String description, String username) {
         User author = userRepository
-                .findById(username)
-                .get();
+                .findByName(username);
         return campaignRepository.save(new Campaign(name, description, author, null));
     }
 }
