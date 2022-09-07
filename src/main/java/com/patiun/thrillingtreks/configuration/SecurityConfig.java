@@ -1,6 +1,5 @@
 package com.patiun.thrillingtreks.configuration;
 
-import com.patiun.thrillingtreks.user.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -16,10 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -39,16 +38,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/campaign-creator").authenticated()
-                        .anyRequest().permitAll()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/sign-in")
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll);
-
+//        http.authorizeHttpRequests((requests) -> requests
+//                        .antMatchers("/campaign-creator").authenticated()
+//                        .anyRequest().permitAll()
+//                )
+//                .formLogin((form) -> form
+//                        .loginPage("/sign-in-page")
+//                        .permitAll()
+//                )
+//                .logout(LogoutConfigurer::permitAll);
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage("/sign-in-page").permitAll();
         return http.build();
     }
 

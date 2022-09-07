@@ -16,9 +16,11 @@ public class Campaign {
     private Long id;
 
     @NotNull
+    @Column(name = "campaign_name")
     private String name;
 
     @NotNull
+    @Column(name = "campaign_description")
     private String description;
 
     @ManyToOne
@@ -26,7 +28,7 @@ public class Campaign {
     @NotNull
     private User author;
 
-    @OneToOne
+    @ManyToOne
     @NotNull
     private Screen startScreen;
 

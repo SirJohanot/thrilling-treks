@@ -10,11 +10,12 @@ import java.util.Map;
 public class Screen {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 
     @NotNull
+    @Column(name = "screen_text")
     private String text;
 
     @OneToMany
