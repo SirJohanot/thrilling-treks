@@ -19,9 +19,11 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User signIn(String name, String password) {
-        String encodedPassword = passwordEncoder.encode(password);
-        return userRepository.save(new User(name, encodedPassword));
+    public void signUp(UserRegistrationDto userRegistrationDto) {
+        String userDtoName = userRegistrationDto.getName();
+        String userDtoPassword = userRegistrationDto.getPassword();
+        String encodedPassword = passwordEncoder.encode(userDtoPassword);
+        userRepository.save(new User(userDtoName, encodedPassword));
     }
 
     @Override

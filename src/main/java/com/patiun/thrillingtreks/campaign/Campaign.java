@@ -5,6 +5,7 @@ import com.patiun.thrillingtreks.user.User;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "campaign")
@@ -16,10 +17,12 @@ public class Campaign {
     private Long id;
 
     @NotNull
+    @NotEmpty
     @Column(name = "campaign_name")
     private String name;
 
     @NotNull
+    @NotEmpty
     @Column(name = "campaign_description")
     private String description;
 

@@ -3,6 +3,7 @@ package com.patiun.thrillingtreks.screen;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 @Entity
@@ -15,11 +16,13 @@ public class Screen {
     private Long id;
 
     @NotNull
+    @NotEmpty
     @Column(name = "screen_text")
     private String text;
 
-    @OneToMany
     @NotNull
+    @NotEmpty
+    @OneToMany
     private Map<String, Screen> actions;
 
     protected Screen() {

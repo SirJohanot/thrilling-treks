@@ -1,17 +1,38 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Sign In | Trilling Treks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-<form action="#" method="post" th:action="@{/sign-in}">
-    <label for="name">Username</label>
-    <input type="text" id="name" name="name"/>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password"/>
-    <input type="submit"/>
-</form>
+<header>
+    <div id="title">
+        <p>
+            Thrilling Treks
+        </p>
+    </div>
+    <button sec:authorize="!isAuthenticated()" id="sign-in-button" type="button"
+            onclick="location.href = '/sign-in-page'">Sign in
+    </button>
+    <button sec:authorize="!isAuthenticated()" id="sign-up-button" type="button"
+            onclick="location.href = '/sign-up-page'">Sign up
+    </button>
+    <p id="user-info" sec:authorize="isAuthenticated()" sec:authentication="name"></p>
+    <button sec:authorize="isAuthenticated()" id="sign-out-button" type="button"
+            onclick="location.href = '/sign-out'">Sign out
+    </button>
+</header>
+<section class="child-centering-column-container stretched">
+    <form action="#" method="post" th:action="@{/sign-in}"
+          class="child-centering-column-container buttons-and-inputs-container">
+        <label for="name">Username</label>
+        <input type="text" id="name" name="username"/>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"/>
+        <input type="submit"/>
+    </form>
+</section>
 </body>
 </html>

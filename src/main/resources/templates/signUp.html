@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Home | Trilling Treks</title>
+    <title>Sign Up | Trilling Treks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
 </head>
@@ -25,10 +25,16 @@
     </button>
 </header>
 <section class="child-centering-column-container stretched">
-    <div class="child-centering-column-container buttons-and-inputs-container">
-        <button type="button" onclick="location.href = '/campaign-creator'">CREATE A CAMPAIGN</button>
-        <button type="button" onclick="location.href = '/campaigns'">VIEW EXISTING CAMPAIGNS</button>
-    </div>
+    <form action="#" method="post" th:action="@{/sign-up}" th:object="${user}"
+          class="child-centering-column-container buttons-and-inputs-container">
+        <label for="name">Username</label>
+        <input type="text" id="name" th:field="*{name}"/>
+        <label for="password">Password</label>
+        <input type="password" id="password" th:field="*{password}"/>
+        <label for="confirmedPassword">Confirm password</label>
+        <input type="password" id="confirmedPassword" th:field="*{confirmedPassword}"/>
+        <input type="submit"/>
+    </form>
 </section>
 </body>
 </html>
