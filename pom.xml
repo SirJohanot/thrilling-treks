@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.patiun</groupId>
-    <artifactId>MainController</artifactId>
+    <artifactId>thrillingtreks</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>thrillingTreks</name>
     <description>thrillingTreks</description>

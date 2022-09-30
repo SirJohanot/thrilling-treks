@@ -2,10 +2,10 @@ package com.patiun.thrillingtreks.campaign;
 
 import com.patiun.thrillingtreks.screen.Screen;
 import com.patiun.thrillingtreks.user.User;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "campaign")
@@ -18,12 +18,12 @@ public class Campaign {
 
     @NotNull
     @NotEmpty
-    @Column(name = "campaign_name")
+    @Column
     private String name;
 
     @NotNull
     @NotEmpty
-    @Column(name = "campaign_description")
+    @Column
     private String description;
 
     @ManyToOne

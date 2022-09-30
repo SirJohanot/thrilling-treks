@@ -1,10 +1,11 @@
 package com.patiun.thrillingtreks.screen;
 
-import com.sun.istack.NotNull;
+import com.patiun.thrillingtreks.action.Action;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Map;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "screen")
@@ -17,19 +18,18 @@ public class Screen {
 
     @NotNull
     @NotEmpty
-    @Column(name = "screen_text")
-    private String text;
+    private String message;
 
     @NotNull
     @NotEmpty
-    @OneToMany
-    private Map<String, Screen> actions;
+    @OneToMany(mappedBy = "screen")
+    private List<Action> actions;
 
     protected Screen() {
     }
 
-    public Screen(String text, Map<String, Screen> actions) {
-        this.text = text;
+    public Screen(String text, List<Action> actions) {
+        this.message = text;
         this.actions = actions;
     }
 
@@ -37,11 +37,11 @@ public class Screen {
         return id;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public Map<String, Screen> getActions() {
+    public List<Action> getActions() {
         return actions;
     }
 
@@ -49,11 +49,11 @@ public class Screen {
         this.id = id;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setMessage(String text) {
+        this.message = text;
     }
 
-    public void setActions(Map<String, Screen> actions) {
+    public void setActions(List<Action> actions) {
         this.actions = actions;
     }
 
@@ -71,7 +71,7 @@ public class Screen {
         if (id != null ? !id.equals(screen.id) : screen.id != null) {
             return false;
         }
-        if (text != null ? !text.equals(screen.text) : screen.text != null) {
+        if (message != null ? !message.equals(screen.message) : screen.message != null) {
             return false;
         }
         return actions != null ? actions.equals(screen.actions) : screen.actions == null;
@@ -80,7 +80,7 @@ public class Screen {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (actions != null ? actions.hashCode() : 0);
         return result;
     }
@@ -89,7 +89,7 @@ public class Screen {
     public String toString() {
         return "Screen{" +
                 "id=" + id +
-                ", text='" + text + '\'' +
+                ", text='" + message + '\'' +
                 ", actions=" + actions +
                 '}';
     }

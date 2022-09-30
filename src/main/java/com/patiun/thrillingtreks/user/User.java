@@ -20,12 +20,12 @@ public class User implements UserDetails {
 
     @NotNull
     @NotEmpty
-    @Column(name = "user_name", unique = true)
+    @Column(unique = true)
     private String name;
 
     @NotNull
     @NotEmpty
-    @Column(name = "user_password")
+    @Column
     private String password;
 
     protected User() {
