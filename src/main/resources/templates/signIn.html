@@ -27,10 +27,14 @@
 <section class="child-centering-column-container stretched">
     <form action="#" method="post" th:action="@{/sign-in}"
           class="child-centering-column-container buttons-and-inputs-container">
-        <label for="name">Username</label>
-        <input type="text" id="name" name="username"/>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password"/>
+        <label>
+            Username
+            <input type="text" id="name" name="username"/>
+        </label>
+        <label>
+            Password
+            <input type="password" id="password" name="password"/>
+        </label>
         <input type="submit"/>
     </form>
 </section>

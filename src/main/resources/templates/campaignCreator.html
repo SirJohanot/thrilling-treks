@@ -5,6 +5,29 @@
     <title>Campaign Creator | Trilling Treks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <script>
+        let screenIndex = 1;
+        let optionIndex = 1;
+
+        function addScreen(campaignFormId) {
+            let campaignForm = document.getElementById(campaignFormId);
+            campaignForm.innerHTML += "<div id='screen" + (screenIndex++) + "'>" +
+                "<input type='text' name='message'/>" +
+                "<div id='option" + (optionIndex++) + "'>" +
+                "<input type='text' name='message'/>" +
+                "<input type='number' min='0' name='nextScreenId'>" +
+                "</div>" +
+                "</div>";
+        }
+
+        function addOption(screenDivId) {
+            let screenDiv = document.getElementById(screenDivId);
+            screenDiv.innerHTML += "<div id='option" + (optionIndex++) + "'>" +
+                "<input type='text' name='message'/>" +
+                "<input type='number' min='0' name='nextScreenId'>" +
+                "</div>";
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -24,6 +47,39 @@
             onclick="location.href = '/sign-out'">Sign out
     </button>
 </header>
-<p>Campaign creator will be here</p>
+<section class="child-centering-column-container stretched">
+    <form id="campaign-form" action="#" method="post" th:action="@{/create-campaign}"
+          class="child-centering-column-container buttons-and-inputs-container">
+        <label>
+            Campaign name
+            <input type="text" id="name" name="name"/>
+        </label>
+        <label>
+            Description
+            <input type="text" id="description" name="description"/>
+        </label>
+        <input type="hidden" id="authorId" name="authorId" th:value="${session.userId}"/>
+        <div id="screen-0">
+            <label>
+                Screen message
+                <input type='text' name='message'/>
+            </label>
+            <div id='option" + (optionIndex++) + "'>
+                <label>
+                    Option message
+                    <input type='text' name='message'/>
+                </label>
+                <label>
+                    Screen to go to
+                    <input type='number' min='0' name='nextScreenId'>
+                </label>
+            </div>
+            <button onclick="addOption('screen-0')">+</button>
+        </div>
+        <button onclick="addScreen('campaign-form')">+</button>
+        <input type="submit"/>
+    </form>
+</section>
+
 </body>
 </html>
