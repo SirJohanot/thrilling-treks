@@ -39,6 +39,7 @@
             Confirm password
             <input type="password" id="confirmedPassword" th:field="*{confirmedPassword}"/>
         </label>
+        <p th:text="${error}">Error message</p>
         <input type="submit"/>
     </form>
 </section>

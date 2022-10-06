@@ -1,5 +1,6 @@
 package com.patiun.thrillingtreks.user;
 
+import com.patiun.thrillingtreks.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,9 +20,16 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void signUp(UserRegistrationDto userRegistrationDto) {
+    public void signUp(UserRegistrationDto userRegistrationDto) throws ValidationException {
         String userDtoName = userRegistrationDto.getName();
+        if (userRepository.findByName(userDtoName) != null) {
+            throw new ValidationException("A user with such name already exists");
+        }
         String userDtoPassword = userRegistrationDto.getPassword();
+        String userDtoConfirmedPassword = userRegistrationDto.getConfirmedPassword();
+        if (!userDtoPassword.equals(userDtoConfirmedPassword)) {
+            throw new ValidationException("The passwords don't match");
+        }
         String encodedPassword = passwordEncoder.encode(userDtoPassword);
         userRepository.save(new User(userDtoName, encodedPassword));
     }

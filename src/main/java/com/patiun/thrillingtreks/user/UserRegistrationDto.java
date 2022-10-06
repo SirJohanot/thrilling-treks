@@ -7,12 +7,12 @@ public class UserRegistrationDto {
 
     @NotNull
     @NotEmpty
-    private String name;                //TODO: check if name already exists
+    private String name;
 
     @NotNull
     @NotEmpty
     private String password;
-    private String confirmedPassword;   //TODO: check for password matching
+    private String confirmedPassword;
 
     protected UserRegistrationDto() {
     }
