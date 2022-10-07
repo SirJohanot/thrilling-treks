@@ -29,15 +29,19 @@
           class="child-centering-column-container buttons-and-inputs-container">
         <label>
             Username
-            <input type="text" id="name" th:field="*{name}"/>
+            <input type="text" id="name" th:field="*{name}" required/>
+        </label>
+        <label>
+            Email
+            <input type="text" id="email" th:field="*{email}" required/>
         </label>
         <label>
             Password
-            <input type="password" id="password" th:field="*{password}"/>
+            <input type="password" id="password" th:field="*{password}" required/>
         </label>
         <label>
             Confirm password
-            <input type="password" id="confirmedPassword" th:field="*{confirmedPassword}"/>
+            <input type="password" id="confirmedPassword" th:field="*{confirmedPassword}" required/>
         </label>
         <p th:text="${error}">Error message</p>
         <input type="submit"/>

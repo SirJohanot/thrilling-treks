@@ -37,20 +37,20 @@ public class Screen {
         return id;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public List<Action> getActions() {
-        return actions;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setMessage(String text) {
-        this.message = text;
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<Action> getActions() {
+        return actions;
     }
 
     public void setActions(List<Action> actions) {

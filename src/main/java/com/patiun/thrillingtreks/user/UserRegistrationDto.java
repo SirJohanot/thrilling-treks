@@ -1,5 +1,6 @@
 package com.patiun.thrillingtreks.user;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +9,11 @@ public class UserRegistrationDto {
     @NotNull
     @NotEmpty
     private String name;
+
+    @NotNull
+    @NotEmpty
+    @Email
+    private String email;
 
     @NotNull
     @NotEmpty
@@ -27,20 +33,28 @@ public class UserRegistrationDto {
         return name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getConfirmedPassword() {
-        return confirmedPassword;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmedPassword() {
+        return confirmedPassword;
     }
 
     public void setConfirmedPassword(String confirmedPassword) {
@@ -56,20 +70,24 @@ public class UserRegistrationDto {
             return false;
         }
 
-        UserRegistrationDto userRegistrationDto = (UserRegistrationDto) o;
+        UserRegistrationDto that = (UserRegistrationDto) o;
 
-        if (name != null ? !name.equals(userRegistrationDto.name) : userRegistrationDto.name != null) {
+        if (name != null ? !name.equals(that.name) : that.name != null) {
             return false;
         }
-        if (password != null ? !password.equals(userRegistrationDto.password) : userRegistrationDto.password != null) {
+        if (email != null ? !email.equals(that.email) : that.email != null) {
             return false;
         }
-        return confirmedPassword != null ? confirmedPassword.equals(userRegistrationDto.confirmedPassword) : userRegistrationDto.confirmedPassword == null;
+        if (password != null ? !password.equals(that.password) : that.password != null) {
+            return false;
+        }
+        return confirmedPassword != null ? confirmedPassword.equals(that.confirmedPassword) : that.confirmedPassword == null;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (confirmedPassword != null ? confirmedPassword.hashCode() : 0);
         return result;
@@ -77,8 +95,9 @@ public class UserRegistrationDto {
 
     @Override
     public String toString() {
-        return "UserDto{" +
+        return "UserRegistrationDto{" +
                 "name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", confirmedPassword='" + confirmedPassword + '\'' +
                 '}';

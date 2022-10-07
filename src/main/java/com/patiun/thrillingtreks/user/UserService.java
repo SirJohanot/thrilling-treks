@@ -25,13 +25,17 @@ public class UserService implements UserDetailsService {
         if (userRepository.findByName(userDtoName) != null) {
             throw new ValidationException("A user with such name already exists");
         }
+
+        String userDtoEmail = userRegistrationDto.getEmail();
+
         String userDtoPassword = userRegistrationDto.getPassword();
         String userDtoConfirmedPassword = userRegistrationDto.getConfirmedPassword();
         if (!userDtoPassword.equals(userDtoConfirmedPassword)) {
             throw new ValidationException("The passwords don't match");
         }
         String encodedPassword = passwordEncoder.encode(userDtoPassword);
-        userRepository.save(new User(userDtoName, encodedPassword));
+
+        userRepository.save(new User(userDtoName, userDtoEmail, encodedPassword));
     }
 
     @Override

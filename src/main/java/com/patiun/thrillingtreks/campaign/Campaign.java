@@ -49,36 +49,36 @@ public class Campaign {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public Screen getStartScreen() {
-        return startScreen;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Screen getStartScreen() {
+        return startScreen;
     }
 
     public void setStartScreen(Screen startScreen) {
@@ -102,8 +102,9 @@ public class Campaign {
         if (name != null ? !name.equals(campaign.name) : campaign.name != null) {
             return false;
         }
-        if (description != null ? !description.equals(campaign.description) : campaign.description != null)
+        if (description != null ? !description.equals(campaign.description) : campaign.description != null) {
             return false;
+        }
         if (author != null ? !author.equals(campaign.author) : campaign.author != null) {
             return false;
         }
