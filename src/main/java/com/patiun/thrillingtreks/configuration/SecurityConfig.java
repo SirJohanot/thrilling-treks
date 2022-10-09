@@ -26,6 +26,8 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/sign-in-page")
                         .loginProcessingUrl("/sign-in")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/sign-out")
