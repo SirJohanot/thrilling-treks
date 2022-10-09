@@ -27,6 +27,7 @@ public class User implements UserDetails {
     @NotNull
     @NotEmpty
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotNull
@@ -83,7 +84,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
     @Override
