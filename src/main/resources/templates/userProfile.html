@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Sign Up | Trilling Treks</title>
+    <title>Home | Trilling Treks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
 </head>
@@ -25,27 +25,12 @@
     </button>
 </header>
 <section class="child-centering-column-container stretched">
-    <form action="#" method="post" th:action="@{/sign-up}" th:object="${user}"
-          class="child-centering-column-container buttons-and-inputs-container">
-        <label>
-            Username
-            <input type="text" id="name" th:field="*{name}" required/>
-        </label>
-        <label>
-            Email
-            <input type="text" id="email" th:field="*{email}" required/>
-        </label>
-        <label>
-            Password
-            <input type="password" id="password" th:field="*{password}" required/>
-        </label>
-        <label>
-            Confirm password
-            <input type="password" id="confirmedPassword" th:field="*{confirmedPassword}" required/>
-        </label>
-        <p th:text="${error}">Error message</p>
-        <input type="submit" value="Sign up"/>
-    </form>
+    <div class="child-centering-column-container buttons-and-inputs-container">
+        <p>Name</p>
+        <p sec:authentication="name">username</p>
+        <p>Email</p>
+        <p sec:authentication="principal.email">user@mail.com</p>
+    </div>
 </section>
 </body>
 </html>
