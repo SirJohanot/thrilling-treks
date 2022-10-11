@@ -23,8 +23,9 @@ public class UserRegistrationDto {
     protected UserRegistrationDto() {
     }
 
-    public UserRegistrationDto(String name, String password, String confirmedPassword) {
+    public UserRegistrationDto(String name, String email, String password, String confirmedPassword) {
         this.name = name;
+        this.email = email;
         this.password = password;
         this.confirmedPassword = confirmedPassword;
     }
