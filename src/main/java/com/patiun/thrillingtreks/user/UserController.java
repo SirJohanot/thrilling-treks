@@ -23,23 +23,24 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String signUp(@ModelAttribute("user") @Valid UserRegistrationDto userRegistrationDto, HttpServletRequest request, Model model) throws ServletException {
+    public String signUp(@ModelAttribute("user") @Valid UserRegistrationDto userRegistrationDto, final Model model, final HttpServletRequest request) throws ServletException {
         try {
             userService.signUp(userRegistrationDto);
         } catch (ValidationException e) {
             model.addAttribute("error", e.getMessage());
             return "signUp";
         }
-        String name = userRegistrationDto.getName();
+        String email = userRegistrationDto.getEmail();
         String password = userRegistrationDto.getPassword();
-        request.logout();
-        request.login(name, password);
+
+        request.login(email, password);
         return "redirect:/";
     }
 
     @GetMapping("/sign-up-page")
-    public String signUpPage(Model model) {
+    public String signUpPage(final Model model) {
         model.addAttribute("user", new UserRegistrationDto());
         return "signUp";
     }
+
 }
