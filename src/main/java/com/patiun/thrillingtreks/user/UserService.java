@@ -1,6 +1,8 @@
 package com.patiun.thrillingtreks.user;
 
+import com.patiun.thrillingtreks.exception.ServiceException;
 import com.patiun.thrillingtreks.exception.ValidationException;
+import com.patiun.thrillingtreks.user.validation.UserRegistrationDtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,26 +15,29 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserRegistrationDtoValidator userRegistrationDtoValidator;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserRegistrationDtoValidator userRegistrationDtoValidator) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userRegistrationDtoValidator = userRegistrationDtoValidator;
     }
 
-    public void signUp(UserRegistrationDto userRegistrationDto) throws ValidationException {
+    public void signUp(UserRegistrationDto userRegistrationDto) throws ServiceException {
         String userDtoName = userRegistrationDto.getName();
         if (userRepository.findByName(userDtoName) != null) {
-            throw new ValidationException("A user with such name already exists");
+            throw new ServiceException("A user with such name already exists");
         }
 
         String userDtoEmail = userRegistrationDto.getEmail();
 
-        String userDtoPassword = userRegistrationDto.getPassword();
-        String userDtoConfirmedPassword = userRegistrationDto.getConfirmedPassword();
-        if (!userDtoPassword.equals(userDtoConfirmedPassword)) {
-            throw new ValidationException("The passwords don't match");
+        try {
+            userRegistrationDtoValidator.validate(userRegistrationDto);
+        } catch (ValidationException e) {
+            throw new ServiceException(e);
         }
+        String userDtoPassword = userRegistrationDto.getPassword();
         String encodedPassword = passwordEncoder.encode(userDtoPassword);
 
         userRepository.save(new User(userDtoName, userDtoEmail, encodedPassword));

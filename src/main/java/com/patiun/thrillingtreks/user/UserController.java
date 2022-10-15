@@ -1,6 +1,6 @@
 package com.patiun.thrillingtreks.user;
 
-import com.patiun.thrillingtreks.exception.ValidationException;
+import com.patiun.thrillingtreks.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,7 @@ public class UserController {
     public String signUp(@ModelAttribute("user") @Valid UserRegistrationDto userRegistrationDto, final Model model, final HttpServletRequest request) throws ServletException {
         try {
             userService.signUp(userRegistrationDto);
-        } catch (ValidationException e) {
+        } catch (ServiceException e) {
             model.addAttribute("error", e.getMessage());
             return "signUp";
         }
