@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -41,6 +43,22 @@ public class UserService implements UserDetailsService {
         String encodedPassword = passwordEncoder.encode(userDtoPassword);
 
         userRepository.save(new User(userDtoName, userDtoEmail, encodedPassword));
+    }
+
+    public void editProfile(Long userId, UserEditProfileDto userEditProfileDto) throws ServiceException {
+        Optional<User> currentUserOptional = userRepository.findById(userId);
+        if (currentUserOptional.isEmpty()) {
+            throw new ServiceException("A user with such name does not exists");
+        }
+        User currentUserData = currentUserOptional.get();
+
+        String newName = userEditProfileDto.getName();
+        currentUserData.setName(newName);
+        
+        String newEmail = userEditProfileDto.getEmail();
+        currentUserData.setEmail(newEmail);
+
+        userRepository.save(currentUserData);
     }
 
     @Override

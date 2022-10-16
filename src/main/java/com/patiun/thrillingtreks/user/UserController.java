@@ -37,6 +37,23 @@ public class UserController {
         return "redirect:/";
     }
 
+    @PostMapping("/edit-profile")
+    public String editProfile(@ModelAttribute("user") @Valid UserEditProfileDto userEditProfileDto, final HttpServletRequest request, final Model model) throws ServletException {
+        User currentUser = (User) request.getUserPrincipal();
+        Long currentUserId = currentUser.getId();
+        try {
+            userService.editProfile(currentUserId, userEditProfileDto);
+        } catch (ServiceException e) {
+            model.addAttribute("error", e.getMessage());
+            return "editProfilePage";
+        }
+        String email = userEditProfileDto.getEmail();
+        String password = currentUser.getPassword();
+
+        request.login(email, password);
+        return "redirect:/user-profile";
+    }
+
     @GetMapping("/sign-up-page")
     public String signUpPage(final Model model) {
         model.addAttribute("user", new UserRegistrationDto());
