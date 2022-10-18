@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Error | Trilling Treks</title>
+    <title>Edit Profile | Trilling Treks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
 </head>
@@ -24,39 +24,20 @@
             onclick="location.href = '/sign-out'">Sign out
     </button>
 </header>
-<section id="home-page-buttons">
-    <table>
-        <tr>
-            <td>Date</td>
-            <td th:text="${timestamp}"></td>
-        </tr>
-        <tr>
-            <td>Path</td>
-            <td th:text="${path}"></td>
-        </tr>
-        <tr>
-            <td>Error</td>
-            <td th:text="${error}"></td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td th:text="${status}"></td>
-        </tr>
-        <tr>
-            <td>Message</td>
-            <td th:text="${message}"></td>
-        </tr>
-        <tr>
-            <td>Exception</td>
-            <td th:text="${exception}"></td>
-        </tr>
-        <tr>
-            <td>Trace</td>
-            <td>
-                <pre th:text="${trace}"></pre>
-            </td>
-        </tr>
-    </table>
+<section class="child-centering-column-container stretched">
+    <form action="#" method="post" th:action="@{/edit-profile}" th:object="${user}"
+          class="child-centering-column-container buttons-and-inputs-container">
+        <label>
+            Username
+            <input type="text" id="name" th:field="*{name}" th:value="${#authentication.principal.name}" required/>
+        </label>
+        <label>
+            Email
+            <input type="email" id="email" th:field="*{email}" th:value="${#authentication.principal.email}" required/>
+        </label>
+        <p th:text="${error}">Error message</p>
+        <input type="submit" value="Confirm changes"/>
+    </form>
 </section>
 </body>
 </html>

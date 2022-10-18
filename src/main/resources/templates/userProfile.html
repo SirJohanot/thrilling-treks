@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Home | Trilling Treks</title>
+    <title th:text="${#authentication.principal.name} | Thrilling Treks">Profile | Trilling Treks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
 </head>
