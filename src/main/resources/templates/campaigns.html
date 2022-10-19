@@ -24,6 +24,12 @@
             onclick="location.href = '/sign-out'">Sign out
     </button>
 </header>
-<p>Campaigns will be here</p>
+<section class="child-centering-column-container stretched">
+    <div th:each="campaign: ${campaigns}" class="child-centering-column-container buttons-and-inputs-container">
+        <p th:text="${campaign.name}">Campaign name</p>
+        <p th:text="Author: ${campaign.author.name}">Author: author name</p>
+        <p th:text="Description: ${campaign.description}">Description: description</p>
+    </div>
+</section>
 </body>
 </html>
