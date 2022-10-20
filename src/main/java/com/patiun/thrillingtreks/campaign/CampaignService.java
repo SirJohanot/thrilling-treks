@@ -5,6 +5,9 @@ import com.patiun.thrillingtreks.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CampaignService {
 
@@ -21,5 +24,11 @@ public class CampaignService {
         User author = userRepository
                 .findByName(username);
         return campaignRepository.save(new Campaign(name, description, author, null));
+    }
+
+    public List<Campaign> getAllCampaigns() {
+        List<Campaign> campaigns = new ArrayList<>();
+        campaignRepository.findAll().forEach(campaigns::add);
+        return campaigns;
     }
 }
