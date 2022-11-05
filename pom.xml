@@ -11,8 +11,8 @@
     <groupId>com.patiun</groupId>
     <artifactId>thrilling-treks</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>thrilling-treks</name>
-    <description>thrilling-treks</description>
+    <name>Thrilling Treks</name>
+    <description>A choose your adventure campaign platform</description>
     <properties>
         <java.version>17</java.version>
     </properties>
