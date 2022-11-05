@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Sign Up | Trilling Treks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header>
+    <div id="title">
+        <p>
+            Thrilling Treks
+        </p>
+    </div>
+    <button sec:authorize="!isAuthenticated()" id="sign-in-button" type="button"
+            onclick="location.href = '/sign-in-page'">Sign in
+    </button>
+    <button sec:authorize="!isAuthenticated()" id="sign-up-button" type="button"
+            onclick="location.href = '/sign-up-page'">Sign up
+    </button>
+    <p id="user-info" sec:authorize="isAuthenticated()" sec:authentication="name"></p>
+    <button sec:authorize="isAuthenticated()" id="sign-out-button" type="button"
+            onclick="location.href = '/sign-out'">Sign out
+    </button>
+</header>
+<section class="child-centering-column-container stretched">
+    <form action="#" method="post" th:action="@{/sign-up}" th:object="${user}"
+          class="child-centering-column-container buttons-and-inputs-container">
+        <label>
+            Username
+            <input type="text" id="name" th:field="*{name}" required/>
+        </label>
+        <label>
+            Email
+            <input type="email" id="email" th:field="*{email}" required/>
+        </label>
+        <label>
+            Password
+            <input type="password" id="password" th:field="*{password}" required/>
+        </label>
+        <label>
+            Confirm password
+            <input type="password" id="confirmedPassword" th:field="*{confirmedPassword}" required/>
+        </label>
+        <p th:text="${error}">Error message</p>
+        <input type="submit" value="Sign up"/>
+    </form>
+</section>
+</body>
+</html>

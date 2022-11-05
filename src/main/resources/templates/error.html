@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Error | Trilling Treks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header>
+    <div id="title">
+        <p>
+            Thrilling Treks
+        </p>
+    </div>
+    <button sec:authorize="!isAuthenticated()" id="sign-in-button" type="button"
+            onclick="location.href = '/sign-in-page'">Sign in
+    </button>
+    <button sec:authorize="!isAuthenticated()" id="sign-up-button" type="button"
+            onclick="location.href = '/sign-up-page'">Sign up
+    </button>
+    <p id="user-info" sec:authorize="isAuthenticated()" sec:authentication="name"></p>
+    <button sec:authorize="isAuthenticated()" id="sign-out-button" type="button"
+            onclick="location.href = '/sign-out'">Sign out
+    </button>
+</header>
+<section id="home-page-buttons">
+    <table>
+        <tr>
+            <td>Date</td>
+            <td th:text="${timestamp}"></td>
+        </tr>
+        <tr>
+            <td>Path</td>
+            <td th:text="${path}"></td>
+        </tr>
+        <tr>
+            <td>Error</td>
+            <td th:text="${error}"></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td th:text="${status}"></td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td th:text="${message}"></td>
+        </tr>
+        <tr>
+            <td>Exception</td>
+            <td th:text="${exception}"></td>
+        </tr>
+        <tr>
+            <td>Trace</td>
+            <td>
+                <pre th:text="${trace}"></pre>
+            </td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>
